@@ -1,0 +1,5 @@
+###################### More Options ######################
+# If you want to have even more control, check out the documentation
+# https://github.com/fastlane/fastlane/blob/master/deliver/Deliverfile.md
+
+firim_api_token "[[FIRIM_API_TOKEN]]" # The fir.im api token
