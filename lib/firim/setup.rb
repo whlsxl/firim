@@ -11,7 +11,7 @@ module Firim
     def generate_firim_file(firim_path, options)
       # Generate the final Firimfile here
       firim = File.read("#{Firim::ROOT}/lib/assets/FirimfileDefault")
-      firim.gsub!("[[FIRIM_API_TOKEN]]", options[:firim_api_token].bundle_id)
+      firim.gsub!("[[FIRIM_API_TOKEN]]", options[:firim_api_token])
       return firim
     end
 

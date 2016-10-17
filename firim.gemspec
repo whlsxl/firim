@@ -7,11 +7,11 @@ Gem::Specification.new do |spec|
   spec.name          = "firim"
   spec.version       = Firim::VERSION
   spec.authors       = ["whlsxl"]
-  spec.email         = ["whlsxl@gmail.com"]
+  spec.email         = ["whlsxl+g@gmail.com"]
 
   spec.summary       = %q{fir.im command tool}
-  spec.description   = %q{fir.im command tool}
-  spec.homepage      = "http://github.com"
+  spec.description   = "fir.im command tool,\n Upload ipa to fir.im"
+  spec.homepage      = "https://github.com/whlsxl/firim"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -22,14 +22,15 @@ Gem::Specification.new do |spec|
     raise "RubyGems 2.0 or newer is required to protect against public gem pushes."
   end
 
-  spec.files         = Dir["lib/**/*"] + %w( README.md )
-  spec.bindir        = "exe"
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+  spec.files         = Dir["lib/**/*"] + %w( bin/firim README.md )
+  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
   # fastlane dependencies
   spec.add_dependency 'fastlane_core', '>= 0.52.0', '< 1.0.0' # all shared code and dependencies
   spec.add_dependency 'credentials_manager', '>= 0.16.0', '< 1.0.0'
+  spec.add_dependency 'faraday', '~> 0.9'
+  spec.add_dependency 'faraday_middleware', '~> 0.9'
 
   spec.add_development_dependency "bundler", "~> 1.12"
   spec.add_development_dependency "rake", "~> 10.0"

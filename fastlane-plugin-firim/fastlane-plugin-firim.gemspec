@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = %q{whlsxl@gmail.com}
 
   spec.summary       = %q{firim}
-  # spec.homepage      = "https://github.com/<GITHUB_USERNAME>/fastlane-plugin-firim"
+  spec.homepage      = "https://github.com/whlsxl/firim/tree/master/fastlane-plugin-firim"
   spec.license       = "MIT"
 
   spec.files         = Dir["lib/**/*"] + %w(README.md LICENSE)

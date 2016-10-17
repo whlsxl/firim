@@ -2,6 +2,10 @@ module Firim
   class DetectValues
     def run!(options)
       find_firim_api_token(options)
+      find_app_identifier(options)
+      find_app_name(options)
+      find_version(options)
+      find_build_version(options)
     end
 
     def find_app_identifier(options)
@@ -16,8 +20,8 @@ module Firim
     def find_app_name(options)
       return if options[:app_name]
       plist = FastlaneCore::IpaFileAnalyser.fetch_info_plist_file(options[:ipa])
-      options[:app_name] ||= plist[:CFBundleDisplayName]
-      options[:app_name] ||= plist[:CFBundleName]
+      options[:app_name] ||= plist['CFBundleDisplayName']
+      options[:app_name] ||= plist['CFBundleName']
     end
 
     def find_version(options)
@@ -26,7 +30,7 @@ module Firim
 
     def find_build_version(options)
       plist = FastlaneCore::IpaFileAnalyser.fetch_info_plist_file(options[:ipa])
-      options[:app_build_version] = plist[:CFBundleVersion]
+      options[:app_build_version] = plist['CFBundleVersion']
     end
 
     def find_firim_api_token(options)

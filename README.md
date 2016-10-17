@@ -1,10 +1,8 @@
 # Firim
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/firim`. To experiment with that code, run `bin/console` for an interactive prompt.
+Firim is a command tool to directly upload ipa and change app infomation on fir.im. fir.im is a Beta APP host website, you can upload ipa for AdHoc or InHouse distribution for testing.
 
-TODO: Delete this and the text above, and describe your gem
-
-## Installation
+## Getting Started
 
 Add this line to your application's Gemfile:
 
@@ -20,22 +18,41 @@ Or install it yourself as:
 
     $ gem install firim
 
-## Usage
+## Quick Start
 
-TODO: Write usage instructions here
+* `cd [your_project_folder]`
+* `firim init`
+* Enter your fir.im API Token (From [Fir.im](http://fir.im/apps))
+* `firim -i [your_ipa_path]`
 
-## Development
+# Usage
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+Use with fastlane [fastlane-plugin-firim](fastlane-plugin-firim/)
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+You can specify the app infomations in `Firimfile`, To get a list of available options run
+
+    firim --help
+    
+Upload with icon ***NOTICE: Icon must be jpg format***
+
+    firim -i [your_ipa_path] -l [your_icon_path]
+
+# Need help?
+
+Please submit an issue on GitHub and provide information about your setup
+
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/firim. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at [https://github.com/whlsxl/firim](https://github.com/whlsxl/firim). This project is intended to be a safe, welcoming space for collaboration.
 
 
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
 
+# TODO
+
+* Export all app infomation to a file 
+* Generate a web page show all the app's link and infomations
+* Show the app list, and export all app infomations to a file
