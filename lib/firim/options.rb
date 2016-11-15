@@ -52,9 +52,11 @@ module Firim
         FastlaneCore::ConfigItem.new(key: :app_is_show_plaza,
                                      description: "Whether the app show in plaza",
                                      is_string: false,
+                                     conflicting_options: [:app_is_opened],
                                      optional: true),
         FastlaneCore::ConfigItem.new(key: :app_passwd,
                                      description: "The app's download page password",
+                                     conflicting_options: [:app_is_opened, :app_is_show_plaza],
                                      optional: true),
         FastlaneCore::ConfigItem.new(key: :app_store_link_visible,
                                      description: "Whether show store link in download page",
@@ -71,6 +73,10 @@ module Firim
                                      optional: true),
         FastlaneCore::ConfigItem.new(key: :app_changelog,
                                      description: "The app's changelog",
+                                     optional: true),
+        # To file
+        FastlaneCore::ConfigItem.new(key: :app_info_to_file_path,
+                                     description: "Append all [app's name] : [URL] to this file",
                                      optional: true)
       ]
     end

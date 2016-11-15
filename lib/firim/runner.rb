@@ -34,8 +34,19 @@ module Firim
 
     def run
       # FastlaneCore::PrintTable.print_values(config: get_app_info, title: "Current online infomation")
-      @app_info.merge( upload_binary_and_icon )
+      @app_info.merge!( upload_binary_and_icon )
+      @app_info.merge!( update_app_info(@app_info["id"]))
+      write_app_info_to_file
+      options = @app_info
+      FastlaneCore::PrintTable.print_values(config: options, title: "#{@app_info["name"]}'s' App Info")
+    end
 
+    def write_app_info_to_file
+      file_path = self.options[:app_info_to_file_path]
+      File.open(file_path, "at") do |f|
+        f.write("#{@app_info["name"]}: http://fir.im/#{@app_info["short"]} \n")
+        UI.success "Write app info to #{file_path} successed!"
+      end
     end
 
     def validation_response response_data
@@ -124,11 +135,12 @@ module Firim
 
     def update_app_info id
       params = {
-        :api_token => options[:firim_api_token]
+        :api_token => self.options[:firim_api_token],
+        :id => id
       }
       ["name", "desc", "short", "is_opened", "is_show_plaza", "passwd", "store_link_visible"].each do |k|
         key = :"app_#{k}"
-        params[k] = options[key] if options[key] != nil
+        params[k] = self.options[key] if self.options[key] != nil
       end
 
       update_app_info_path = "apps/#{id}"
@@ -139,6 +151,7 @@ module Firim
       info = response.body
       validation_response info
       UI.success "Update app info successed!"
+      return info
     end
 
   end

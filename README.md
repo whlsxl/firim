@@ -32,7 +32,7 @@ Use with fastlane [fastlane-plugin-firim](fastlane-plugin-firim/)
 You can specify the app infomations in `Firimfile`, To get a list of available options run
 
     firim --help
-    
+
 Upload with icon ***NOTICE: Icon must be jpg format***
 
     firim -i [your_ipa_path] -l [your_icon_path]
@@ -53,6 +53,7 @@ The gem is available as open source under the terms of the [MIT License](http://
 
 # TODO
 
-* Export all app infomation to a file 
+* Export all app infomation to a file
 * Generate a web page show all the app's link and infomations
 * Show the app list, and export all app infomations to a file
+* force reset icon
