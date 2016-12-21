@@ -43,6 +43,7 @@ module Firim
 
     def write_app_info_to_file
       file_path = self.options[:app_info_to_file_path]
+      return if file_path == nil
       File.open(file_path, "at") do |f|
         f.write("#{@app_info["name"]}: http://fir.im/#{@app_info["short"]} \n")
         UI.success "Write app info to #{file_path} successed!"
