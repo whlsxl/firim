@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   # fastlane dependencies
-  spec.add_dependency 'fastlane', '~> 2.1.0'
+  spec.add_dependency 'fastlane', '>= 2.1.0', '< 3.0.0'
   spec.add_dependency 'faraday', '~> 0.9'
   spec.add_dependency 'faraday_middleware', '~> 0.9'
 
