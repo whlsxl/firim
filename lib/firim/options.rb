@@ -8,7 +8,11 @@ module Firim
         # firim info
         FastlaneCore::ConfigItem.new(key: :firim_api_token,
                                      short_option: "-a",
+                                     optional: true,
                                      description: "fir.im user api token"),
+        FastlaneCore::ConfigItem.new(key: :firim_username,
+                                     optional: true,
+                                     description: "fir.im username, a sign for identify different token"),
 
         # Content path
         FastlaneCore::ConfigItem.new(key: :ipa,

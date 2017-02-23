@@ -19,7 +19,7 @@ module Firim
       program :version, Firim::VERSION
       program :description, 'fir.im command tool'
       program :help, 'Author', 'Hailong Wang <whlsxl+g@gmail.com>'
-      program :help, 'GitHub', 'https://github.com/fastlane/fastlane/tree/master/deliver'
+      program :help, 'GitHub', 'https://github.com/whlsxl/firim'
       program :help_formatter, :compact
 
       FastlaneCore::CommanderGenerator.new.generate(Firim::Options.available_options)
@@ -60,9 +60,58 @@ module Firim
         end
       end
 
+      command :addtoken do |c|
+        c.syntax = 'firim addtoken'
+        c.description = 'Add a firim api token to keychain. username is not necessary, Just a sign for multiple api token.'
+
+        c.option '--username username', String, 'Username to add(not necessary).'
+        c.option '--token token', String, 'API token to add'
+
+        c.action do |args, options|
+          username = options.username || ask('Username(not necessary): ')
+          token = options.token || ask('Password: ') { |q| q.echo = '*'}
+
+          add(username, token)
+
+          puts "Token #{username || '`default`'}: #{'*' * token.length} added to keychain."
+        end
+      end
+
+      # Command to remove credential from Keychain
+      command :removetoken do |c|
+        c.syntax = 'firim removetoken'
+        c.description = 'Removes a firim token from the keychain.'
+
+        c.option '--username username', String, 'Username to remove(or default).'
+
+        c.action do |args, options|
+          username = options.username || ask('Username: ')
+
+          remove(username)
+        end
+      end
+
       default_command :run
 
       run!
+    end
+
+
+    private
+
+    # Add entry to Apple Keychain
+    def add(username, token)
+      Firim::AccountManager.new(
+        user: username,
+        token: token
+      ).add_to_keychain
+    end
+    
+    # Remove entry from Apple Keychain using AccountManager
+    def remove(username)
+      Firim::AccountManager.new(
+        user: username
+      ).remove_from_keychain
     end
   end
 end

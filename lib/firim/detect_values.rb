@@ -34,7 +34,14 @@ module Firim
     end
 
     def find_firim_api_token(options)
-      return if options[:firim_api_token]
+      option_token = options[:firim_api_token]
+      keychain_token = Firim::AccountManager.new(user: options[:firim_username])
+      token = keychain_token.token(ask_if_missing: option_token == nil)
+      if token
+        options[:firim_api_token] = token
+        return 
+      end
+
       options[:firim_api_token] ||= UI.input("The API Token of fir.im: ")
     end
   end

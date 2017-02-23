@@ -4,6 +4,7 @@ require 'firim/options'
 require 'firim/runner'
 require 'firim/setup'
 require "firim/version"
+require "firim/account_manager"
 
 require 'fastlane_core'
 
