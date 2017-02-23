@@ -51,7 +51,7 @@ module Firim
     end
 
     def validation_response response_data
-      error_code = response_data['errors']['code'].to_int rescue 0
+      error_code = response_data['code'].to_i rescue 0
       if error_code == 100020
         UI.user_error!("Firim API Token(#{options[:firim_api_token]}) not correct")
       end
