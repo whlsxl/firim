@@ -36,6 +36,17 @@ You can specify the app infomations in `Firimfile`, To get a list of available o
 Upload with icon ***NOTICE: Icon must be jpg format***
 
     firim -i [your_ipa_path] -l [your_icon_path]
+    
+# Assgin API Token
+
+There are three ways to assgin Firim API Token
+
+1. Set `FIRIM_TOKEN` environment variables
+2. Add `token` to `macOS Keychain`
+3. Set in `Firimfile`
+
+`Firim` will check the value from 1 to 3. Run `Firim` will add `token` to `keychain` in interactive shell. Also can use `firim addtoken` and `firim removetoken` to add or remove `token`.
+
 
 # Need help?
 
