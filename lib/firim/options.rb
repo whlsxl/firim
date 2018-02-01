@@ -5,6 +5,10 @@ module Firim
   class Options
     def self.available_options
       [
+         # firim platform
+        FastlaneCore::ConfigItem.new(key: :platform,
+                                     optional: true,
+                                     description: "The fir platform"),
         # firim info
         FastlaneCore::ConfigItem.new(key: :firim_api_token,
                                      short_option: "-a",
@@ -13,7 +17,6 @@ module Firim
         FastlaneCore::ConfigItem.new(key: :firim_username,
                                      optional: true,
                                      description: "fir.im username, a sign for identify different token"),
-
         # Content path
         FastlaneCore::ConfigItem.new(key: :ipa,
                                      short_option: "-i",
@@ -28,6 +31,25 @@ module Firim
                                      conflict_block: proc do |value|
                                        UI.user_error!("You can't use 'ipa' and '#{value.key}' options in one run.")
                                      end),
+        FastlaneCore::ConfigItem.new(key: :apk,
+                                     env_name: "DELIVER_APK_PATH",
+                                     description: "Path to your apk file",
+                                     default_value: Dir["*.apk"].first,
+                                     verify_block: proc do |value|
+                                       UI.user_error!("Could not find apk file at path '#{value}'") unless File.exist?(value)
+                                       UI.user_error!("'#{value}' doesn't seem to be an apk file") unless value.end_with?(".apk")
+                                     end,
+                                     conflicting_options: [:pkg],
+                                     conflict_block: proc do |value|
+                                       UI.user_error!("You can't use 'apk' and '#{value.key}' options in one run.")
+                                     end),
+        FastlaneCore::ConfigItem.new(key: :file,
+                                     optional: true,
+                                     description: "Path to your pkg file"),
+        FastlaneCore::ConfigItem.new(key: :gradle_file,
+                                     short_option: "-g",
+                                     optional: true,
+                                     description: "Path to your gradle file"),
         FastlaneCore::ConfigItem.new(key: :icon,
                                      description: "Path to the app icon, MUST BE jpg",
                                      optional: true,

@@ -4,12 +4,21 @@ module Fastlane
       def self.run(config)
         require 'firim'
         config.load_configuration_file('Firimfile')
-        config[:ipa] = Actions.lane_context[SharedValues::IPA_OUTPUT_PATH] if Actions.lane_context[SharedValues::IPA_OUTPUT_PATH]
+
+        if config[:apk]
+          config[:platform] = 'android'
+          config[:file] = config[:apk]
+        else
+          config[:platform] = 'ios'
+          config[:ipa] = Actions.lane_context[SharedValues::IPA_OUTPUT_PATH] if Actions.lane_context[SharedValues::IPA_OUTPUT_PATH]
+          config[:file] = config[:ipa]
+        end
+
         ::Firim::Runner.new(config).run
       end
 
       def self.description
-        "Uses firim to upload ipa to fir.im"
+        "Uses firim to upload ipa/apk to fir.im"
       end
 
       def self.authors
@@ -22,9 +31,9 @@ module Fastlane
         FastlaneCore::CommanderGenerator.new.generate(::Firim::Options.available_options)
       end
 
-      # Only support ios now
+      # support ios/android now
       def self.is_supported?(platform)
-        [:ios].include?(platform)
+        [:ios, :android].include?(platform)
       end
     end
   end
