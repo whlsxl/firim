@@ -28,7 +28,12 @@ module Firim
         c.response :json, :content_type => /\bjson$/
       end
 
-      Firim::DetectValues.new.run!(self.options)
+      if self.options[:platform] == 'ios'
+        Firim::DetectValues.new.run!(self.options)
+      else
+        Firim::DetectAndroidValues.new.run!(self.options)
+      end
+
       FastlaneCore::PrintTable.print_values(config: options, title: "firim #{Firim::VERSION} Summary")
     end
 
@@ -59,7 +64,7 @@ module Firim
 
     def get_app_info
       app_info_path = "apps/latest/" + options[:app_identifier]
-      response = self.firim_client.get app_info_path, { :api_token => options[:firim_api_token], :type => "ios" }
+      response = self.firim_client.get app_info_path, { :api_token => options[:firim_api_token], :type => options[:platform] }
       info = response.body == nil ? {} : response.body
       validation_response info
       info
@@ -69,7 +74,7 @@ module Firim
       upload_publish_path = "apps/"
       response = self.firim_client.post do |req|
         req.url upload_publish_path
-        req.body = { :type => 'ios', :bundle_id => options[:app_identifier], :api_token => options[:firim_api_token] }
+        req.body = { :type => options[:platform], :bundle_id => options[:app_identifier], :api_token => options[:firim_api_token] }
       end
       info = response.body
       validation_response info
@@ -102,7 +107,7 @@ module Firim
       params = {
         'key' => binary_info['key'],
         'token' => binary_info['token'],
-        'file' => Faraday::UploadIO.new(self.options[:ipa], 'application/octet-stream'),
+        'file' => Faraday::UploadIO.new(self.options[:file], 'application/octet-stream'),
         'x:name' => self.options[:app_name],
         'x:version' => self.options[:app_version],
         'x:build' => self.options[:app_build_version]
