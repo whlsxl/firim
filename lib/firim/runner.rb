@@ -11,6 +11,17 @@ module Firim
       return "http://api.fir.im/"
     end
 
+    def guess_platform
+      return self.options[:platform] if self.options[:platform]
+      if self.options[:ipa]
+        return "ios"
+      elsif self.options[:apk]
+        return "android"
+      else
+        return nil
+      end
+    end
+
     def initialize(options)
       self.options = options
       @app_info = {}
@@ -21,6 +32,14 @@ module Firim
           open_timeout:  300
         }
       }
+
+      if self.options[:apk]
+        self.options[:file] = self.options[:apk]
+      else
+        self.options[:file] = self.options[:ipa]
+      end
+      self.options[:platform] = self.guess_platform
+      UI.user_error!("Platform not given --platform ios/android") if self.options[:platform] == nil
 
       @firim_client = Faraday.new(self.class.firim_hostname, conn_options) do |c|
         c.request  :url_encoded             # form-encode POST params
@@ -56,9 +75,12 @@ module Firim
     end
 
     def validation_response response_data
-      error_code = response_data['code'].to_i rescue 0
+      error_code = response_data['code'].to_i
+      return if error_code == 0
       if error_code == 100020
         UI.user_error!("Firim API Token(#{options[:firim_api_token]}) not correct")
+      else
+        UI.user_error!("Firim API ERROR error_code: #{error_code}")
       end
     end
 
@@ -78,6 +100,9 @@ module Firim
       end
       info = response.body
       validation_response info
+      if info['cert']['binary']['key'] == nil
+        UI.user_error!("Response body ERROR: #{response.body}")
+      end
       begin
         upload_binary info['cert']['binary']
         upload_icon info['cert']['icon']
@@ -104,6 +129,17 @@ module Firim
     end
 
     def upload_binary binary_info
+      UI.user_error!("app_name did not provide --app_name [name]") if self.options[:app_name] == nil
+      UI.user_error!("app_version did not provide --app_version [version]") if self.options[:app_version] == nil
+      UI.user_error!("app_build_version did not provide --app_build_version [build_version]") if self.options[:app_build_version] == nil
+      if self.options[:file] == nil
+        if self.options[:platform] == "ios"
+          UI.user_error!("ipa file did not provide --ipa [ipa_path]")
+        else
+          UI.user_error!("apk file did not provide --ipa [apk_path]")
+        end
+      end
+
       params = {
         'key' => binary_info['key'],
         'token' => binary_info['token'],

@@ -5,14 +5,7 @@ module Fastlane
         require 'firim'
         config.load_configuration_file('Firimfile')
 
-        if config[:apk]
-          config[:platform] = 'android'
-          config[:file] = config[:apk]
-        else
-          config[:platform] = 'ios'
-          config[:ipa] = Actions.lane_context[SharedValues::IPA_OUTPUT_PATH] if Actions.lane_context[SharedValues::IPA_OUTPUT_PATH]
-          config[:file] = config[:ipa]
-        end
+        config[:ipa] = Actions.lane_context[SharedValues::IPA_OUTPUT_PATH] if Actions.lane_context[SharedValues::IPA_OUTPUT_PATH]
 
         ::Firim::Runner.new(config).run
       end

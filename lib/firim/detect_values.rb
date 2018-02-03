@@ -56,7 +56,8 @@ module Firim
     end
 
     def read_key_from_gradle_file(gradle_file, key)
-      value = false
+      return nil if gradle_file == nil
+      value = nil
       begin
         file = File.new(gradle_file, "r")
         while (line = file.gets)

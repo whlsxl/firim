@@ -8,7 +8,7 @@ module Firim
          # firim platform
         FastlaneCore::ConfigItem.new(key: :platform,
                                      optional: true,
-                                     description: "The fir platform"),
+                                     description: "The fir platform, support ios/android"),
         # firim info
         FastlaneCore::ConfigItem.new(key: :firim_api_token,
                                      short_option: "-a",
@@ -27,10 +27,6 @@ module Firim
                                      verify_block: proc do |value|
                                        UI.user_error!("Could not find ipa file at path '#{value}'") unless File.exist?(value)
                                        UI.user_error!("'#{value}' doesn't seem to be an ipa file") unless value.end_with?(".ipa")
-                                     end,
-                                     conflicting_options: [:pkg],
-                                     conflict_block: proc do |value|
-                                       UI.user_error!("You can't use 'ipa' and '#{value.key}' options in one run.")
                                      end),
         FastlaneCore::ConfigItem.new(key: :apk,
                                      optional: true,
@@ -41,13 +37,10 @@ module Firim
                                        UI.user_error!("Could not find apk file at path '#{value}'") unless File.exist?(value)
                                        UI.user_error!("'#{value}' doesn't seem to be an apk file") unless value.end_with?(".apk")
                                      end,
-                                     conflicting_options: [:pkg],
+                                     conflicting_options: [:ipa],
                                      conflict_block: proc do |value|
                                        UI.user_error!("You can't use 'apk' and '#{value.key}' options in one run.")
                                      end),
-        FastlaneCore::ConfigItem.new(key: :file,
-                                     optional: true,
-                                     description: "Path to your pkg file"),
         FastlaneCore::ConfigItem.new(key: :gradle_file,
                                      short_option: "-g",
                                      optional: true,
@@ -60,6 +53,10 @@ module Firim
                                        UI.user_error!("Could not find png file at path '#{value}'") unless File.exist?(value)
                                        UI.user_error!("'#{value}' doesn't seem to be a png file") unless value.end_with?(".jpg")
                                      end),
+
+        FastlaneCore::ConfigItem.new(key: :file,
+                                     optional: true,
+                                     description: "Path to your pkg file"),
         # APP info
         FastlaneCore::ConfigItem.new(key: :app_identifier,
                                      description: "The app's identifier",
