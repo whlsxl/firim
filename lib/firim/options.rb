@@ -19,6 +19,7 @@ module Firim
                                      description: "fir.im username, a sign for identify different token"),
         # Content path
         FastlaneCore::ConfigItem.new(key: :ipa,
+                                     optional: true,
                                      short_option: "-i",
                                      env_name: "DELIVER_IPA_PATH",
                                      description: "Path to your ipa file",
@@ -32,9 +33,10 @@ module Firim
                                        UI.user_error!("You can't use 'ipa' and '#{value.key}' options in one run.")
                                      end),
         FastlaneCore::ConfigItem.new(key: :apk,
+                                     optional: true,
                                      env_name: "DELIVER_APK_PATH",
                                      description: "Path to your apk file",
-                                     default_value: Dir["*.apk"].first,
+                                     default_value: Dir["app/build/outputs/apk/prod/release/*.apk"].first,
                                      verify_block: proc do |value|
                                        UI.user_error!("Could not find apk file at path '#{value}'") unless File.exist?(value)
                                        UI.user_error!("'#{value}' doesn't seem to be an apk file") unless value.end_with?(".apk")
