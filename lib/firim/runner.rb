@@ -100,7 +100,11 @@ module Firim
       end
       info = response.body
       validation_response info
-      if info['cert']['binary']['key'] == nil
+      begin
+        if info['cert']['binary']['key'] == nil
+          UI.user_error!("Response body ERROR: #{response.body}")
+        end
+      rescue Exception => e
         UI.user_error!("Response body ERROR: #{response.body}")
       end
       begin
