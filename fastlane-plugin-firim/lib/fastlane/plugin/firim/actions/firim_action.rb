@@ -5,7 +5,9 @@ module Fastlane
         require 'firim'
         config.load_configuration_file('Firimfile')
 
-        config[:ipa] = Actions.lane_context[SharedValues::IPA_OUTPUT_PATH] if Actions.lane_context[SharedValues::IPA_OUTPUT_PATH]
+        if !config[:ipa]
+          config[:ipa] = Actions.lane_context[SharedValues::IPA_OUTPUT_PATH] if Actions.lane_context[SharedValues::IPA_OUTPUT_PATH]
+        end
 
         ::Firim::Runner.new(config).run
       end

@@ -56,7 +56,7 @@ module Firim
 
         FastlaneCore::ConfigItem.new(key: :file,
                                      optional: true,
-                                     description: "Path to your pkg file"),
+                                     description: "Don't use this for upload file"),
         # APP info
         FastlaneCore::ConfigItem.new(key: :app_identifier,
                                      description: "The app's identifier",
