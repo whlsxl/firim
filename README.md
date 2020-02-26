@@ -37,6 +37,8 @@ Upload with icon ***NOTICE: Icon must be jpg format***
 
     firim -i [your_ipa_path] -l [your_icon_path]
     
+Use `firim_api_url` to set API URL, if `fir.im` change the Base URL. default is `https://api.fir.im`.
+
 # Assgin API Token
 
 There are three ways to assgin Firim API Token

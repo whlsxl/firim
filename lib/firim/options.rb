@@ -9,6 +9,10 @@ module Firim
         FastlaneCore::ConfigItem.new(key: :platform,
                                      optional: true,
                                      description: "The fir platform, support ios/android"),
+        # fir.im api url
+        FastlaneCore::ConfigItem.new(key: :firim_api_url,
+                                     default_value: "https://api.fir.im",
+                                     description: "fir.im api URL"),
         # firim info
         FastlaneCore::ConfigItem.new(key: :firim_api_token,
                                      short_option: "-a",

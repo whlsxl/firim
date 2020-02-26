@@ -7,8 +7,9 @@ module Firim
     attr_accessor :options
     attr_reader :firim_client
 
-    def self.firim_hostname
-      return "http://api.fir.im/"
+    def firim_hostname
+      api_url = self.options[:firim_api_url]
+      return api_url
     end
 
     def guess_platform
@@ -41,7 +42,7 @@ module Firim
       self.options[:platform] = self.guess_platform
       UI.user_error!("Platform not given --platform ios/android") if self.options[:platform] == nil
 
-      @firim_client = Faraday.new(self.class.firim_hostname, conn_options) do |c|
+      @firim_client = Faraday.new(self.firim_hostname, conn_options) do |c|
         c.request  :url_encoded             # form-encode POST params
         c.adapter  :net_http
         c.response :json, :content_type => /\bjson$/
