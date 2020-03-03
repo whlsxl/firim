@@ -1,3 +1,7 @@
+***Important***
+
+***For the reason of fir.im had change the Base URL, pls set `firim_api_url` to `http://api.jappstore.com/` or `http://api.bq04.com`.*** [issue](https://github.com/whlsxl/firim/issues/26)
+
 # Firim
 
 Firim is a command tool to directly upload ipa and change app infomation on fir.im. fir.im is a Beta APP host website, you can upload ipa for AdHoc or InHouse distribution for testing.
@@ -39,9 +43,9 @@ Upload with icon ***NOTICE: Icon must be jpg format***
     
 Use `firim_api_url` to set API URL, if `fir.im` change the Base URL. default is `https://api.fir.im`.
 
-# Assgin API Token
+# Assign API Token
 
-There are three ways to assgin Firim API Token
+There are three ways to assign Firim API Token
 
 1. Set `FIRIM_TOKEN` environment variables
 2. Add `token` to `macOS Keychain`
