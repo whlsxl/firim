@@ -1,6 +1,6 @@
 ***Important***
 
-***For the reason of fir.im had change the Base URL, pls set `firim_api_url` to `http://api.jappstore.com/` or `http://api.bq04.com`.*** [issue](https://github.com/whlsxl/firim/issues/26)
+***For the reason of fir.im had changed the Base URL, pls set `firim_api_url` to `http://api.jappstore.com/` or `http://api.bq04.com`.*** [issue](https://github.com/whlsxl/firim/issues/26)
 
 # Firim
 
