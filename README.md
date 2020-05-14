@@ -2,6 +2,8 @@
 
 ***For the reason of fir.im had changed the Base URL, pls set `firim_api_url` to `http://api.jappstore.com/` or `http://api.bq04.com`.*** [issue](https://github.com/whlsxl/firim/issues/26)
 
+From v0.2.5, the default `firim_api_url` set to `http://api.bq04.com`.
+
 # Firim
 
 Firim is a command tool to directly upload ipa and change app infomation on fir.im. fir.im is a Beta APP host website, you can upload ipa for AdHoc or InHouse distribution for testing.
