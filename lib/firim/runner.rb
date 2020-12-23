@@ -63,6 +63,7 @@ module Firim
       @app_info.merge!( update_app_info(@app_info["id"]))
       write_app_info_to_file
       options = @app_info
+      options[:download_page_url] = download_url
       FastlaneCore::PrintTable.print_values(config: options, title: "#{@app_info["name"]}'s' App Info")
     end
 
@@ -70,9 +71,18 @@ module Firim
       file_path = self.options[:app_info_to_file_path]
       return if file_path == nil
       File.open(file_path, "at") do |f|
-        f.write("#{@app_info["name"]}: http://fir.im/#{@app_info["short"]} \n")
+        d_url = download_url
+        f.write("#{@app_info["name"]}:  #{d_url}\n")
         UI.success "Write app info to #{file_path} successed!"
       end
+    end
+
+    def download_url
+      prefix = self.options[:download_page_prefix]
+      if prefix[1..-1] != "/"
+        return "#{prefix}/#{@app_info["short"]}"
+      end
+      return "#{prefix}#{@app_info["short"]}"
     end
 
     def validation_response response_data

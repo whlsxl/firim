@@ -21,6 +21,12 @@ module Firim
         FastlaneCore::ConfigItem.new(key: :firim_username,
                                      optional: true,
                                      description: "fir.im username, a sign for identify different token"),
+
+        FastlaneCore::ConfigItem.new(key: :download_page_prefix,
+                                     short_option: "-p",
+                                     optional: true,
+                                     default_value: "http://d.firim.top/",
+                                     description: "fir.im user api token"),
         # Content path
         FastlaneCore::ConfigItem.new(key: :ipa,
                                      optional: true,
