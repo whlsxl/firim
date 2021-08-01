@@ -2,7 +2,7 @@
 
 ***For the reason of fir.im had changed the Base URL, pls set `firim_api_url` to `https://fir-api.fircli.cn/` or `https://api.bq04.com`.*** [issue](https://github.com/whlsxl/firim/issues/26)
 
-From v0.2.5, the default `firim_api_url` set to `http://api.bq04.com`.
+From v0.2.5, the default `firim_api_url` set to `https://api.bq04.com`.
 
 From firim v0.2.6, add show download url in terminal. [issue](https://github.com/whlsxl/firim/issues/32)
 # Firim
@@ -29,7 +29,7 @@ Or install it yourself as:
 
 * `cd [your_project_folder]`
 * `firim init`
-* Enter your fir.im API Token (From [Fir.im](http://fir.im/apps))
+* Enter your fir.im API Token (From [Fir.im](https://fir.im/apps))
 * `firim -i [your_ipa_path]`
 
 # Usage
