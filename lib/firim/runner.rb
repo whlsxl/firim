@@ -64,6 +64,9 @@ module Firim
       write_app_info_to_file
       options = @app_info
       options[:download_page_url] = download_url
+      ENV["FIRIM_APP_URL"] = download_url
+      ENV["FIRIM_APP_NAME"] = options["name"]
+      ENV["FIRIM_APP_SHORT"] = options["short"]
       FastlaneCore::PrintTable.print_values(config: options, title: "#{@app_info["name"]}'s' App Info")
     end
 
