@@ -46,6 +46,8 @@ Upload with icon ***NOTICE: Icon must be jpg format***
     
 Use `firim_api_url` to set API URL, if `fir.im` change the Base URL. default is `https://api.fir.im`.
 
+## Export environments
+
 After upload app to fir.im, firim will export some environment variables.
 
 * `FIRIM_APP_SHORT` app's short path
