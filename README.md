@@ -46,6 +46,12 @@ Upload with icon ***NOTICE: Icon must be jpg format***
     
 Use `firim_api_url` to set API URL, if `fir.im` change the Base URL. default is `https://api.fir.im`.
 
+After upload app to fir.im, firim will export some environment variables.
+
+* `FIRIM_APP_SHORT` app's short path
+* `FIRIM_APP_NAME` app's name
+* `FIRIM_APP_URL` the download page of the app
+
 # Assign API Token
 
 There are three ways to assign Firim API Token
@@ -73,7 +79,6 @@ The gem is available as open source under the terms of the [MIT License](http://
 
 # TODO
 
-* Export all app infomation to a file
-* Generate a web page show all the app's link and infomations
-* Show the app list, and export all app infomations to a file
-* force reset icon
+- [ ]  Generate a web page show all the app's link and infomations
+- [x]  Show the app list, and export all app infomations to a file
+- [ ]  force reset icon
