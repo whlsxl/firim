@@ -52,6 +52,7 @@ After upload app to fir.im, firim will export some environment variables.
 
 * `FIRIM_APP_SHORT` app's short path
 * `FIRIM_APP_NAME` app's name
+* `FIRIM_MASTER_RELEASE_ID` app's master_release_id
 * `FIRIM_APP_URL` the download page of the app
 
 # Assign API Token
