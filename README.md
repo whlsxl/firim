@@ -55,6 +55,8 @@ After upload app to fir.im, firim will export some environment variables.
 * `FIRIM_MASTER_RELEASE_ID` app's master_release_id
 * `FIRIM_APP_URL` the download page of the app
 
+All other App Info export as `FIRIM_#{key}`, like `FIRIM_icon_url`
+
 # Assign API Token
 
 There are three ways to assign Firim API Token

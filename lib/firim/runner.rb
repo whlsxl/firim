@@ -68,6 +68,7 @@ module Firim
       ENV["FIRIM_APP_NAME"] = options["name"]
       ENV["FIRIM_APP_SHORT"] = options["short"]
       ENV["FIRIM_MASTER_RELEASE_ID"] = options["master_release_id"]
+      options.each { |key, value| ENV["FIRIM_#{key}"] = "#{value}" }
       FastlaneCore::PrintTable.print_values(config: options, title: "#{@app_info["name"]}'s' App Info")
     end
 
